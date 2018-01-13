@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Here` enum in crate `frunk_core`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Here">
+
+    <title>frunk_core::hlist::Here - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc enum">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
+        
+        <p class='location'>Enum Here</p><div class="sidebar-elems"><div class="block items"><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Selector%3CT%2C%20Here%3E">Selector&lt;T, Here&gt;</a><a href="#impl-Plucker%3CT%2C%20Here%3E">Plucker&lt;T, Here&gt;</a><a href="#impl-HMappable%3CF%2C%20Here%3E">HMappable&lt;F, Here&gt;</a><a href="#impl-HMappable%3CHCons%3CF%2C%20HNil%3E%2C%20Here%3E">HMappable&lt;HCons&lt;F, HNil&gt;, Here&gt;</a><a href="#impl-HFoldRightable%3CF%2C%20Init%2C%20Here%3E">HFoldRightable&lt;F, Init, Here&gt;</a><a href="#impl-HFoldLeftable%3CF%2C%20Acc%2C%20Here%3E">HFoldLeftable&lt;F, Acc, Here&gt;</a><a href="#impl-HFoldLeftable%3CHCons%3CF%2C%20HNil%3E%2C%20Acc%2C%20Here%3E">HFoldLeftable&lt;HCons&lt;F, HNil&gt;, Acc, Here&gt;</a><a href="#impl-LiftFrom%3CT%2C%20Here%3E">LiftFrom&lt;T, Here&gt;</a></div></div><p class='location'><a href='../index.html'>frunk_core</a>::<wbr><a href='index.html'>hlist</a></p><script>window.sidebarCurrent = {name: 'Here', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script></div>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../index.html'>frunk_core</a>::<wbr><a href='index.html'>hlist</a>::<wbr><a class="enum" href=''>Here</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/frunk_core/hlist.rs.html#361' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum Here {}</pre><div class='docblock'><p>Largely lifted from <a href="https://github.com/Sgeo/hlist/blob/master/src/lib.rs#L30">https://github.com/Sgeo/hlist/blob/master/src/lib.rs#L30</a>
+Used as an index into an <code>HList</code>.</p>
+
+<p><code>Here</code> is 0, pointing to the head of the HList.</p>
+
+<p>Users should normally allow type inference to create this type</p>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Selector%3CT%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;T, Tail&gt; <a class="trait" href="../../frunk_core/hlist/trait.Selector.html" title="trait frunk_core::hlist::Selector">Selector</a>&lt;T, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;T, Tail&gt;</code><a href='#impl-Selector%3CT%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#390-394' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.get' class="method"><span id='get.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.Selector.html#tymethod.get' class='fnname'>get</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>T</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#391-393' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Allows you to retrieve a unique type from an HList <a href="../../frunk_core/hlist/trait.Selector.html#tymethod.get">Read more</a></p>
+</div></div><h3 id='impl-Plucker%3CT%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;T, Tail&gt; <a class="trait" href="../../frunk_core/hlist/trait.Plucker.html" title="trait frunk_core::hlist::Plucker">Plucker</a>&lt;T, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;T, Tail&gt;</code><a href='#impl-Plucker%3CT%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#428-434' title='goto source code'>[src]</a></span></h3>
+<div class='docblock'><p>Implementation when the pluck target is in head</p>
+</div><div class='impl-items'><h4 id='associatedtype.Remainder' class="type"><span id='Remainder.t' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.Plucker.html#associatedtype.Remainder' class="type">Remainder</a> = Tail</code></span></h4>
+<div class='docblock'><p>What is left after you pluck the target from the Self</p>
+</div><h4 id='method.pluck' class="method"><span id='pluck.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.Plucker.html#tymethod.pluck' class='fnname'>pluck</a>(self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a>T, Self::<a class="type" href="../../frunk_core/hlist/trait.Plucker.html#associatedtype.Remainder" title="type frunk_core::hlist::Plucker::Remainder">Remainder</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#431-433' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns the target with the remainder of the list in a pair <a href="../../frunk_core/hlist/trait.Plucker.html#tymethod.pluck">Read more</a></p>
+</div></div><h3 id='impl-HMappable%3CF%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;F&gt; <a class="trait" href="../../frunk_core/hlist/trait.HMappable.html" title="trait frunk_core::hlist::HMappable">HMappable</a>&lt;F, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a></code><a href='#impl-HMappable%3CF%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#616-622' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output' class="type"><span id='Output.t' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output' class="type">Output</a> = <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a></code></span></h4>
+<h4 id='method.map' class="method"><span id='map.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HMappable.html#tymethod.map' class='fnname'>map</a>(self, _: F) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output" title="type frunk_core::hlist::HMappable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#619-621' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Maps over the current data structure using functions stored in another data structure. <a href="../../frunk_core/hlist/trait.HMappable.html#tymethod.map">Read more</a></p>
+</div></div><h3 id='impl-HMappable%3CHCons%3CF%2C%20HNil%3E%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;'a, F, R, H&gt; <a class="trait" href="../../frunk_core/hlist/trait.HMappable.html" title="trait frunk_core::hlist::HMappable">HMappable</a>&lt;<a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;F, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for &amp;'a <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;H, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>H) -&gt; R,&nbsp;</span></code><a href='#impl-HMappable%3CHCons%3CF%2C%20HNil%3E%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#624-638' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-1' class="type"><span id='Output.t-1' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output' class="type">Output</a> = <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;R, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;</code></span></h4>
+<h4 id='method.map-1' class="method"><span id='map.v-1' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HMappable.html#tymethod.map' class='fnname'>map</a>(self, f: <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;F, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output" title="type frunk_core::hlist::HMappable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#630-637' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Maps over the current data structure using functions stored in another data structure. <a href="../../frunk_core/hlist/trait.HMappable.html#tymethod.map">Read more</a></p>
+</div></div><h3 id='impl-HMappable%3CF%2C%20Here%3E-1' class='impl'><span class='in-band'><code>impl&lt;'a, F, R, H&gt; <a class="trait" href="../../frunk_core/hlist/trait.HMappable.html" title="trait frunk_core::hlist::HMappable">HMappable</a>&lt;F, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for &amp;'a <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;H, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.Fn.html" title="trait core::ops::function::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>H) -&gt; R,&nbsp;</span></code><a href='#impl-HMappable%3CF%2C%20Here%3E-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#641-654' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-2' class="type"><span id='Output.t-2' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output' class="type">Output</a> = <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;R, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;</code></span></h4>
+<h4 id='method.map-2' class="method"><span id='map.v-2' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HMappable.html#tymethod.map' class='fnname'>map</a>(self, f: F) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HMappable.html#associatedtype.Output" title="type frunk_core::hlist::HMappable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#647-653' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Maps over the current data structure using functions stored in another data structure. <a href="../../frunk_core/hlist/trait.HMappable.html#tymethod.map">Read more</a></p>
+</div></div><h3 id='impl-HFoldRightable%3CF%2C%20Init%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;F, Init&gt; <a class="trait" href="../../frunk_core/hlist/trait.HFoldRightable.html" title="trait frunk_core::hlist::HFoldRightable">HFoldRightable</a>&lt;F, Init, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a></code><a href='#impl-HFoldRightable%3CF%2C%20Init%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#756-762' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-3' class="type"><span id='Output.t-3' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HFoldRightable.html#associatedtype.Output' class="type">Output</a> = Init</code></span></h4>
+<h4 id='method.foldr' class="method"><span id='foldr.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HFoldRightable.html#tymethod.foldr' class='fnname'>foldr</a>(self, _: F, i: Init) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HFoldRightable.html#associatedtype.Output" title="type frunk_core::hlist::HFoldRightable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#759-761' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>foldr over a data structure <a href="../../frunk_core/hlist/trait.HFoldRightable.html#tymethod.foldr">Read more</a></p>
+</div></div><h3 id='impl-HFoldLeftable%3CF%2C%20Acc%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;F, Acc&gt; <a class="trait" href="../../frunk_core/hlist/trait.HFoldLeftable.html" title="trait frunk_core::hlist::HFoldLeftable">HFoldLeftable</a>&lt;F, Acc, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a></code><a href='#impl-HFoldLeftable%3CF%2C%20Acc%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#892-898' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-4' class="type"><span id='Output.t-4' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output' class="type">Output</a> = Acc</code></span></h4>
+<h4 id='method.foldl' class="method"><span id='foldl.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl' class='fnname'>foldl</a>(self, _: F, acc: Acc) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output" title="type frunk_core::hlist::HFoldLeftable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#895-897' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>foldl over a data structure <a href="../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl">Read more</a></p>
+</div></div><h3 id='impl-HFoldLeftable%3CF%2C%20Acc%2C%20Here%3E-1' class='impl'><span class='in-band'><code>impl&lt;'a, F, R, H, Acc&gt; <a class="trait" href="../../frunk_core/hlist/trait.HFoldLeftable.html" title="trait frunk_core::hlist::HFoldLeftable">HFoldLeftable</a>&lt;F, Acc, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for &amp;'a <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;H, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>(Acc, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>H) -&gt; R,&nbsp;</span></code><a href='#impl-HFoldLeftable%3CF%2C%20Acc%2C%20Here%3E-1' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#900-910' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-5' class="type"><span id='Output.t-5' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output' class="type">Output</a> = R</code></span></h4>
+<h4 id='method.foldl-1' class="method"><span id='foldl.v-1' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl' class='fnname'>foldl</a>(self, folder: F, acc: Acc) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output" title="type frunk_core::hlist::HFoldLeftable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#906-909' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>foldl over a data structure <a href="../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl">Read more</a></p>
+</div></div><h3 id='impl-HFoldLeftable%3CHCons%3CF%2C%20HNil%3E%2C%20Acc%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;'a, F, R, H, Acc&gt; <a class="trait" href="../../frunk_core/hlist/trait.HFoldLeftable.html" title="trait frunk_core::hlist::HFoldLeftable">HFoldLeftable</a>&lt;<a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;F, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;, Acc, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for &amp;'a <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;H, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html" title="trait core::ops::function::FnOnce">FnOnce</a>(Acc, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;'a </a>H) -&gt; R,&nbsp;</span></code><a href='#impl-HFoldLeftable%3CHCons%3CF%2C%20HNil%3E%2C%20Acc%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#912-922' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Output-6' class="type"><span id='Output.t-6' class='invisible'><code>type <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output' class="type">Output</a> = R</code></span></h4>
+<h4 id='method.foldl-2' class="method"><span id='foldl.v-2' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl' class='fnname'>foldl</a>(self, folder: <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;F, <a class="struct" href="../../frunk_core/hlist/struct.HNil.html" title="struct frunk_core::hlist::HNil">HNil</a>&gt;, acc: Acc) -&gt; Self::<a class="type" href="../../frunk_core/hlist/trait.HFoldLeftable.html#associatedtype.Output" title="type frunk_core::hlist::HFoldLeftable::Output">Output</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#917-921' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>foldl over a data structure <a href="../../frunk_core/hlist/trait.HFoldLeftable.html#tymethod.foldl">Read more</a></p>
+</div></div><h3 id='impl-LiftFrom%3CT%2C%20Here%3E' class='impl'><span class='in-band'><code>impl&lt;T, Tail&gt; <a class="trait" href="../../frunk_core/hlist/trait.LiftFrom.html" title="trait frunk_core::hlist::LiftFrom">LiftFrom</a>&lt;T, <a class="enum" href="../../frunk_core/hlist/enum.Here.html" title="enum frunk_core::hlist::Here">Here</a>&gt; for <a class="struct" href="../../frunk_core/hlist/struct.HCons.html" title="struct frunk_core::hlist::HCons">HCons</a>&lt;T, Tail&gt; <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;Tail: <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> + <a class="trait" href="../../frunk_core/hlist/trait.HList.html" title="trait frunk_core::hlist::HList">HList</a>,&nbsp;</span></code><a href='#impl-LiftFrom%3CT%2C%20Here%3E' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#1164-1171' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.lift_from' class="method"><span id='lift_from.v' class='invisible'><code>fn <a href='../../frunk_core/hlist/trait.LiftFrom.html#tymethod.lift_from' class='fnname'>lift_from</a>(part: T) -&gt; Self</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/frunk_core/hlist.rs.html#1168-1170' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs the indexed conversion.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "frunk_core";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+(function() {var implementors = {};
+implementors["frunk_core"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"frunk_core/hlist/struct.HNil.html\" title=\"struct frunk_core::hlist::HNil\">HNil</a>","impl&lt;T:&nbsp;<a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a>, Tail:&nbsp;<a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> + <a class=\"trait\" href=\"frunk_core/hlist/trait.HList.html\" title=\"trait frunk_core::hlist::HList\">HList</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"frunk_core/hlist/struct.HCons.html\" title=\"struct frunk_core::hlist::HCons\">HCons</a>&lt;T, Tail&gt;",];
+implementors["quote"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"quote/struct.Tokens.html\" title=\"struct quote::Tokens\">Tokens</a>",];
+implementors["syn"] = ["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"syn/struct.Generics.html\" title=\"struct syn::Generics\">Generics</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"syn/struct.WhereClause.html\" title=\"struct syn::WhereClause\">WhereClause</a>","impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"syn/struct.AngleBracketedParameterData.html\" title=\"struct syn::AngleBracketedParameterData\">AngleBracketedParameterData</a>",];
+
+            if (window.register_implementors) {
+                window.register_implementors(implementors);
+            } else {
+                window.pending_implementors = implementors;
+            }
+        
+})()

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["generic","Derives a Generic instance based on HList for a given Struct or Tuple Struct"],["labelled_generic","Derives a Generic instance based on Field + HList for a given Struct (Tuple Structs not supported because they have no labels)"]]});

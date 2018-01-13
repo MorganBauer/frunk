@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["convert_from","Converts one type into another assuming they have the same generic Representation"],["from_generic","Given a generic Representation of an A, returns A"],["into_generic","Given an A, returns its generic Representation"]],"trait":[["Generic","A trait that converts from a type to a generic representation"]]});

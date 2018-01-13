@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `labelled` mod in crate `frunk_core`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, labelled">
+
+    <title>frunk_core::labelled - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc mod">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
+        
+        <p class='location'>Module labelled</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div><p class='location'><a href='../index.html'>frunk_core</a></p><script>window.sidebarCurrent = {name: 'labelled', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>frunk_core</a>::<wbr><a class="mod" href=''>labelled</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/frunk_core/labelled.rs.html#1-565' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>This module holds the machinery behind LabelledGeneric.</p>
+
+<p>A LabelledGeneric instance is pretty much exactly the same as a Generic instance, except
+that the generic representation should contain information about field names.</p>
+
+<p>Having a separate trait for LabelledGenerics gives us the freedom to derive both
+lablled and non-labelled generic type class instances for our types.</p>
+
+<p>Asides from the main LabelledGeneric trait, this module holds helper methods that allow
+users to use LabelledGeneric without using universal function call syntax.</p>
+
+<p>In addition, this module holds macro-generated enums that map to letters in field names (identifiers).</p>
+
+<h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
+<pre class="rust rust-example-rendered">
+<span class="comment">// Optionally alias our tuple that represents our type-level string</span>
+<span class="kw">type</span> <span class="ident">name</span> <span class="op">=</span> (<span class="ident">n</span>,<span class="ident">a</span>,<span class="ident">m</span>,<span class="ident">e</span>);
+<span class="kw">let</span> <span class="ident">labelled</span> <span class="op">=</span> <span class="macro">field</span><span class="macro">!</span>[<span class="ident">name</span>, <span class="string">&quot;Lloyd&quot;</span>];
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">labelled</span>.<span class="ident">name</span>, <span class="string">&quot;name&quot;</span>);
+<span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">labelled</span>.<span class="ident">value</span>, <span class="string">&quot;Lloyd&quot;</span>)<a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0A%23%5Bmacro_use%5D%20extern%20crate%20frunk_core%3B%0Ause%20frunk_core%3A%3Alabelled%3A%3A*%3B%0Ause%20frunk_core%3A%3Ahlist%3A%3A*%3B%0Afn%20main()%20%7B%0A%2F%2F%20Optionally%20alias%20our%20tuple%20that%20represents%20our%20type-level%20string%0Atype%20name%20%3D%20(n%2Ca%2Cm%2Ce)%3B%0Alet%20labelled%20%3D%20field!%5Bname%2C%20%22Lloyd%22%5D%3B%0Aassert_eq!(labelled.name%2C%20%22name%22)%3B%0Aassert_eq!(labelled.value%2C%20%22Lloyd%22)%0A%7D%0A">Run</a></pre>
+
+<p>A more common usage is to use LabelledGeneric to transform strucst that have mis-matched
+fields !</p>
+
+<pre class="rust rust-example-rendered">
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">LabelledGeneric</span>)]</span>
+<span class="kw">struct</span> <span class="ident">NewUser</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="ident">first_name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
+    <span class="ident">last_name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
+    <span class="ident">age</span>: <span class="ident">usize</span>,
+}
+
+<span class="comment">// Notice that the fields are mismatched in terms of ordering</span>
+<span class="comment">// *and* also in terms of the number of fields.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">LabelledGeneric</span>)]</span>
+<span class="kw">struct</span> <span class="ident">ShortUser</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="ident">last_name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
+    <span class="ident">first_name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
+}
+
+<span class="kw">let</span> <span class="ident">n_user</span> <span class="op">=</span> <span class="ident">NewUser</span> {
+    <span class="ident">first_name</span>: <span class="string">&quot;Joe&quot;</span>,
+    <span class="ident">last_name</span>: <span class="string">&quot;Blow&quot;</span>,
+    <span class="ident">age</span>: <span class="number">30</span>,
+};
+
+<span class="comment">// transform_from automagically sculpts the labelled generic</span>
+<span class="comment">// representation of the source object to that of the target type</span>
+<span class="kw">let</span> <span class="ident">s_user</span>: <span class="ident">ShortUser</span> <span class="op">=</span> <span class="ident">transform_from</span>(<span class="ident">n_user</span>); <span class="comment">// done</span><a class="test-arrow" target="_blank" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0A%23%5Ballow(unused_imports)%5D%0A%23%5Bmacro_use%5D%20extern%20crate%20frunk_derives%3B%0A%23%5Bmacro_use%5D%20extern%20crate%20frunk_core%3B%0Ause%20frunk_core%3A%3Ahlist%3A%3A*%3B%20fn%20main()%20%7B%0Ause%20frunk_core%3A%3Ahlist%3A%3A*%3B%0Ause%20frunk_core%3A%3Alabelled%3A%3A*%3B%0A%23%5Bderive(LabelledGeneric)%5D%0Astruct%20NewUser%3C'a%3E%20%7B%0A%20%20%20%20first_name%3A%20%26'a%20str%2C%0A%20%20%20%20last_name%3A%20%26'a%20str%2C%0A%20%20%20%20age%3A%20usize%2C%0A%7D%0A%0A%2F%2F%20Notice%20that%20the%20fields%20are%20mismatched%20in%20terms%20of%20ordering%0A%2F%2F%20*and*%20also%20in%20terms%20of%20the%20number%20of%20fields.%0A%23%5Bderive(LabelledGeneric)%5D%0Astruct%20ShortUser%3C'a%3E%20%7B%0A%20%20%20%20last_name%3A%20%26'a%20str%2C%0A%20%20%20%20first_name%3A%20%26'a%20str%2C%0A%7D%0A%0Alet%20n_user%20%3D%20NewUser%20%7B%0A%20%20%20%20first_name%3A%20%22Joe%22%2C%0A%20%20%20%20last_name%3A%20%22Blow%22%2C%0A%20%20%20%20age%3A%2030%2C%0A%7D%3B%0A%0A%2F%2F%20transform_from%20automagically%20sculpts%20the%20labelled%20generic%0A%2F%2F%20representation%20of%20the%20source%20object%20to%20that%20of%20the%20target%20type%0Alet%20s_user%3A%20ShortUser%20%3D%20transform_from(n_user)%3B%20%2F%2F%20done%0A%7D%0A">Run</a></pre>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.Field.html"
+                                  title='struct frunk_core::labelled::Field'>Field</a></td>
+                           <td class='docblock-short'>
+                                <p>A Label contains a type-level Name, a runtime value, and
+a reference to a <code>&amp;&#39;static str</code> name.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="struct" href="struct.ValueField.html"
+                                  title='struct frunk_core::labelled::ValueField'>ValueField</a></td>
+                           <td class='docblock-short'>
+                                <p>A version of Field that doesn&#39;t have a type-level label, just a
+value-level one</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.A.html"
+                                  title='enum frunk_core::labelled::A'>A</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.B.html"
+                                  title='enum frunk_core::labelled::B'>B</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.C.html"
+                                  title='enum frunk_core::labelled::C'>C</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.D.html"
+                                  title='enum frunk_core::labelled::D'>D</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.E.html"
+                                  title='enum frunk_core::labelled::E'>E</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.F.html"
+                                  title='enum frunk_core::labelled::F'>F</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.G.html"
+                                  title='enum frunk_core::labelled::G'>G</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.H.html"
+                                  title='enum frunk_core::labelled::H'>H</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.I.html"
+                                  title='enum frunk_core::labelled::I'>I</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.J.html"
+                                  title='enum frunk_core::labelled::J'>J</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.K.html"
+                                  title='enum frunk_core::labelled::K'>K</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.L.html"
+                                  title='enum frunk_core::labelled::L'>L</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.M.html"
+                                  title='enum frunk_core::labelled::M'>M</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.N.html"
+                                  title='enum frunk_core::labelled::N'>N</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.O.html"
+                                  title='enum frunk_core::labelled::O'>O</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.P.html"
+                                  title='enum frunk_core::labelled::P'>P</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Q.html"
+                                  title='enum frunk_core::labelled::Q'>Q</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.R.html"
+                                  title='enum frunk_core::labelled::R'>R</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.S.html"
+                                  title='enum frunk_core::labelled::S'>S</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.T.html"
+                                  title='enum frunk_core::labelled::T'>T</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.U.html"
+                                  title='enum frunk_core::labelled::U'>U</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.V.html"
+                                  title='enum frunk_core::labelled::V'>V</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.W.html"
+                                  title='enum frunk_core::labelled::W'>W</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.X.html"
+                                  title='enum frunk_core::labelled::X'>X</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Y.html"
+                                  title='enum frunk_core::labelled::Y'>Y</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.Z.html"
+                                  title='enum frunk_core::labelled::Z'>Z</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._0.html"
+                                  title='enum frunk_core::labelled::_0'>_0</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._1.html"
+                                  title='enum frunk_core::labelled::_1'>_1</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._2.html"
+                                  title='enum frunk_core::labelled::_2'>_2</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._3.html"
+                                  title='enum frunk_core::labelled::_3'>_3</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._4.html"
+                                  title='enum frunk_core::labelled::_4'>_4</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._5.html"
+                                  title='enum frunk_core::labelled::_5'>_5</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._6.html"
+                                  title='enum frunk_core::labelled::_6'>_6</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._7.html"
+                                  title='enum frunk_core::labelled::_7'>_7</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._8.html"
+                                  title='enum frunk_core::labelled::_8'>_8</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum._9.html"
+                                  title='enum frunk_core::labelled::_9'>_9</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.__.html"
+                                  title='enum frunk_core::labelled::__'>__</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.a.html"
+                                  title='enum frunk_core::labelled::a'>a</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.b.html"
+                                  title='enum frunk_core::labelled::b'>b</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.c.html"
+                                  title='enum frunk_core::labelled::c'>c</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.d.html"
+                                  title='enum frunk_core::labelled::d'>d</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.e.html"
+                                  title='enum frunk_core::labelled::e'>e</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.f.html"
+                                  title='enum frunk_core::labelled::f'>f</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.g.html"
+                                  title='enum frunk_core::labelled::g'>g</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.h.html"
+                                  title='enum frunk_core::labelled::h'>h</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.i.html"
+                                  title='enum frunk_core::labelled::i'>i</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.j.html"
+                                  title='enum frunk_core::labelled::j'>j</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.k.html"
+                                  title='enum frunk_core::labelled::k'>k</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.l.html"
+                                  title='enum frunk_core::labelled::l'>l</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.m.html"
+                                  title='enum frunk_core::labelled::m'>m</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.n.html"
+                                  title='enum frunk_core::labelled::n'>n</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.o.html"
+                                  title='enum frunk_core::labelled::o'>o</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.p.html"
+                                  title='enum frunk_core::labelled::p'>p</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.q.html"
+                                  title='enum frunk_core::labelled::q'>q</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.r.html"
+                                  title='enum frunk_core::labelled::r'>r</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.s.html"
+                                  title='enum frunk_core::labelled::s'>s</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.t.html"
+                                  title='enum frunk_core::labelled::t'>t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.u.html"
+                                  title='enum frunk_core::labelled::u'>u</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.v.html"
+                                  title='enum frunk_core::labelled::v'>v</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.w.html"
+                                  title='enum frunk_core::labelled::w'>w</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.x.html"
+                                  title='enum frunk_core::labelled::x'>x</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.y.html"
+                                  title='enum frunk_core::labelled::y'>y</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="enum" href="enum.z.html"
+                                  title='enum frunk_core::labelled::z'>z</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.IntoUnlabelled.html"
+                                  title='trait frunk_core::labelled::IntoUnlabelled'>IntoUnlabelled</a></td>
+                           <td class='docblock-short'>
+                                <p>Trait for turning a Field HList into an un-labelled HList</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.IntoValueLabelled.html"
+                                  title='trait frunk_core::labelled::IntoValueLabelled'>IntoValueLabelled</a></td>
+                           <td class='docblock-short'>
+                                <p>A trait that strips type-level strings from the labels</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="trait" href="trait.LabelledGeneric.html"
+                                  title='trait frunk_core::labelled::LabelledGeneric'>LabelledGeneric</a></td>
+                           <td class='docblock-short'>
+                                <p>A trait that converts from a type to a labelled generic representation</p>
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.field_with_name.html"
+                                  title='fn frunk_core::labelled::field_with_name'>field_with_name</a></td>
+                           <td class='docblock-short'>
+                                <p>Returns a new Field for a given value and custom name.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.from_labelled_generic.html"
+                                  title='fn frunk_core::labelled::from_labelled_generic'>from_labelled_generic</a></td>
+                           <td class='docblock-short'>
+                                <p>Given a labelled generic Representation of an A, returns A</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.into_labelled_generic.html"
+                                  title='fn frunk_core::labelled::into_labelled_generic'>into_labelled_generic</a></td>
+                           <td class='docblock-short'>
+                                <p>Given an A, returns its labelled generic Representation</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.labelled_convert_from.html"
+                                  title='fn frunk_core::labelled::labelled_convert_from'>labelled_convert_from</a></td>
+                           <td class='docblock-short'>
+                                <p>Converts one type into another assuming they have the same labelled generic Representation</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.sculpted_convert_from.html"
+                                  title='fn frunk_core::labelled::sculpted_convert_from'>sculpted_convert_from</a></td>
+                           <td class='docblock-short'>
+                               [<div class='stab deprecated'>Deprecated</div>] <p>Converts from one type into another assuming that their labelled generic representations
+can be sculpted into each other.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class="fn" href="fn.transform_from.html"
+                                  title='fn frunk_core::labelled::transform_from'>transform_from</a></td>
+                           <td class='docblock-short'>
+                                <p>Converts from one type into another assuming that their labelled generic representations
+can be sculpted into each other.</p>
+                           </td>
+                       </tr></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>↑</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>↓</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt style="width:31px;">+ / -</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "frunk_core";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
